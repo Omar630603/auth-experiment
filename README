@@ -1,0 +1,54 @@
+# API-Experiment
+
+This is an API project using NodeJS, ExpressJS, and MongoDB. The goal of this project is to try testing API Auth endpoints using Jest and Supertest.
+
+# Features
+
+- Register new users
+- Login user and return access token
+- Fetch user's profile data
+- Update user's profile data
+- Delete user's profile data
+- Logout users
+
+# Getting Started
+
+## Installation
+
+Clone the repository
+
+    npm install
+
+## Usage
+
+Start for development
+
+    npm run dev
+
+Start for production
+
+    npm run start
+
+Run tests
+
+    npm run testB01
+    npm run testB02
+    npm run testB03
+    npm run testB04
+    npm run testB05
+    npm run testBA
+
+
+    B is the project name, and the number is the test number.
+    The BA test is to test all the suits in the project.
+
+The project can be tested using Postman to check the endpoints.
+
+The endpoints are:
+
+- POST /api/v1/auth/register
+- POST /api/v1/auth/login
+- GET /api/v1/auth/profile
+- PUT /api/v1/auth/profile
+- DELETE /api/v1/auth/profile
+- GET /api/v1/auth/logout
