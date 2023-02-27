@@ -5,6 +5,7 @@ const {
   login,
   getProfile,
   updateProfile,
+  updatePassword,
   logout,
   deleteProfile,
 } = require("../controllers/auth.controller");
@@ -18,6 +19,8 @@ router.post("/login", login);
 router.get("/profile", getProfile);
 
 router.patch("/profile", updateProfile);
+
+router.patch("/profile/password", updatePassword);
 
 router.delete("/profile", deleteProfile);
 

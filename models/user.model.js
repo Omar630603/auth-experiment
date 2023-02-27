@@ -1,8 +1,4 @@
-// user model
-
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
@@ -29,12 +25,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Please enter your password"],
-      minlength: [6, "Minimum password length is 6 characters"],
-    },
-    role: {
-      type: String,
-      enum: ["user", "admin"],
-      default: "user",
     },
   },
   {
@@ -43,27 +33,13 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// auto generate unique username from name
-userSchema.pre("save", function (next) {
-  this.username = this.name.toLowerCase().split(" ").join("");
-  next();
+userSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+    delete returnedObject.password;
+  },
 });
 
-userSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
-});
-
-// sign JWT and return
-userSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE,
-  });
-};
-
-// match user entered password to hashed password in database
-userSchema.methods.matchPassword = async function (enteredPassword) {};
-
-// export model
 module.exports = mongoose.model("User", userSchema);

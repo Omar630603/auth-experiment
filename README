@@ -8,6 +8,7 @@ This is an API project using NodeJS, ExpressJS, and MongoDB. The goal of this pr
 - Login user and return access token
 - Fetch user's profile data
 - Update user's profile data
+- Update user's password
 - Delete user's profile data
 - Logout users
 
@@ -49,6 +50,7 @@ The endpoints are:
 - POST /api/v1/auth/register
 - POST /api/v1/auth/login
 - GET /api/v1/auth/profile
-- PUT /api/v1/auth/profile
+- PATCH /api/v1/auth/profile
+- PATCH /api/v1/auth/profile/password
 - DELETE /api/v1/auth/profile
 - GET /api/v1/auth/logout
