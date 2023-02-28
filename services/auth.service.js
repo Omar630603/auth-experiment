@@ -10,9 +10,9 @@ async function register(params) {
     return {
       user: user.toJSON(),
       token: token,
-      message: "Registered Successfully",
+      message: "Registered User Successfully",
     };
-  } else throw "Registration Failed";
+  } else throw "Registration User Failed";
 }
 
 async function login(username, password) {
@@ -21,7 +21,11 @@ async function login(username, password) {
   }).exec();
   if (user && bcrypt.compareSync(password, user.password)) {
     const token = authJWT.generateAccessToken(user.id);
-    return { user: user.toJSON(), token: token, message: "Logged In" };
+    return {
+      user: user.toJSON(),
+      token: token,
+      message: "Logged In User Successfully",
+    };
   } else throw "Incorrect Username or Password";
 }
 
@@ -50,9 +54,9 @@ async function updateProfile(id, username, name, email) {
     new: true,
   });
 
-  if (!user) throw "Update Failed";
+  if (!user) throw "Profile Update Failed";
 
-  return { user: user.toJSON(), message: "Updated Profile Successfully" };
+  return { user: user.toJSON(), message: "Profile Updated Successfully" };
 }
 
 async function updatePassword(id, password) {
@@ -64,21 +68,21 @@ async function updatePassword(id, password) {
     new: true,
   });
 
-  if (!user) throw "Update Failed";
+  if (!user) throw "Profile Update Failed";
 
-  return { user: user.toJSON(), message: "Updated Password Successfully" };
+  return { user: user.toJSON(), message: "Password Updated Successfully" };
 }
 
 async function deleteProfile(id) {
   authJWT.invalidateAccessToken(id);
   const user = await User.findByIdAndDelete(id).exec();
-  if (!user) throw "Delete Failed";
-  return { message: "Deleted Successfully" };
+  if (!user) throw "User Delete Failed";
+  return { message: "User Deleted Successfully" };
 }
 
 async function logout(id) {
   authJWT.invalidateAccessToken(id);
-  return { message: "Logged Out" };
+  return { message: "Logged Out Successfully" };
 }
 
 module.exports = {

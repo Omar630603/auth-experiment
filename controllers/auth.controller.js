@@ -30,7 +30,7 @@ function register(req, res, next) {
 
   authServices
     .register({ name, email, username, password })
-    .then((results) => res.status(200).json(results))
+    .then((results) => res.status(201).json(results))
     .catch((err) => next(err));
 }
 
@@ -74,11 +74,15 @@ function updateProfile(req, res, next) {
 
 function updatePassword(req, res, next) {
   const id = req.user.id;
-  const requiredFields = ["oldPassword", "newPassword", "confirmNewPassword"];
+  const requiredFields = [
+    "currentPassword",
+    "newPassword",
+    "confirmNewPassword",
+  ];
 
   validateData(req.body, res, requiredFields);
 
-  const oldPassword = req.body.oldPassword;
+  const currentPassword = req.body.currentPassword;
   const newPassword = req.body.newPassword;
   const confirmNewPassword = req.body.confirmNewPassword;
 
@@ -93,7 +97,7 @@ function updatePassword(req, res, next) {
   }
 
   authServices
-    .checkPassword(id, oldPassword)
+    .checkPassword(id, currentPassword)
     .then((results) => {
       if (results) {
         const password = bcrypt.hashSync(newPassword, bcrypt.genSaltSync(10));
