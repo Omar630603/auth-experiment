@@ -19,7 +19,7 @@ let token = null;
 beforeAll(async () => {
   await connectDB().then(
     async () => {
-      // console.log("Database connected successfully");
+      console.log("Database connected successfully");
     },
     (err) => {
       console.log("There is problem while connecting database " + err);
@@ -54,9 +54,11 @@ const options = {
 
 describe("Testing application configuration", () => {
   it("should have the right name and packages", (done) => {
-    expect(packages.name, "name should be auth-experiment", options).toBe(
-      "-experiment"
-    );
+    expect(
+      packages.name,
+      `the name provided ${packages.name} is wrong. The application name should be auth-experiment, check the package.json file`,
+      options
+    ).toBe("auth-experiment");
     expect(packages.version).toBe("1.0.0");
     expect(packages.devDependencies).toHaveProperty("cross-env");
     expect(packages.devDependencies).toHaveProperty("jest");
