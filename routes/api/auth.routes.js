@@ -8,7 +8,7 @@ const {
   updatePassword,
   logout,
   deleteProfile,
-} = require("../controllers/auth.controller");
+} = require("../../controllers/api/auth.controller");
 
 const router = express.Router();
 

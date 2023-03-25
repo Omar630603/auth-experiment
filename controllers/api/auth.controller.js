@@ -1,6 +1,6 @@
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
-const authServices = require("../services/auth.service");
+const authServices = require("../../services/auth.service");
 
 function register(req, res, next) {
   const requiredFields = [

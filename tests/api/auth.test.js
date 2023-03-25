@@ -1,7 +1,7 @@
 const request = require("supertest");
-const app = require("../app");
+const app = require("../../app");
 const mongoose = require("mongoose");
-const packages = require("../package.json");
+const packages = require("../../package.json");
 
 require("dotenv").config();
 mongoose.set("strictQuery", true);

@@ -1,10 +1,11 @@
 const express = require("express");
+const path = require("path");
+const ejsLayouts = require("express-ejs-layouts");
 const app = express();
 const cors = require("cors");
-const authService = require("./services/auth.service");
 const authJWT = require("./helpers/jsonwebtoken.helper");
 const errors = require("./helpers/errorhandler.helper");
-const authRoutes = require("./routes/auth.routes");
+const authRoutes = require("./routes/api/auth.routes");
 
 app.use(
   cors({
@@ -14,36 +15,45 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "web")));
+app.use(ejsLayouts);
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "web", "views"));
+app.set("layout", path.join(__dirname, "web", "layouts", "main"));
 
 app.use(
   authJWT.authenticateToken.unless({
     path: [
+      { url: "/", methods: ["GET"] },
+      { url: "/register", methods: ["GET"] },
+      { url: "/login", methods: ["GET"] },
+      { url: "/api/v1/test", methods: ["GET"] },
       { url: "/api/v1/register", methods: ["POST"] },
       { url: "/api/v1/login", methods: ["POST"] },
     ],
   })
 );
+
+app.get("/", (req, res) => {
+  return res.render("index", {
+    title: "Auth-Experiment | Home",
+  });
+});
+
 app.use("/api/v1", authRoutes);
 app.use(errors.errorHandler);
 
-app.get("/", (req, res) => {
-  if (req.user) {
-    authService.getProfile(req.user.id).then((results) => {
-      const name = results?.user?.name;
-      return res.status(200).json({
-        message: `Welcome ${name} to the auth-experiment API`,
-      });
-    });
-  } else {
-    return res
-      .status(200)
-      .json({ message: "Welcome to the auth-experiment API" });
-  }
+app.get("/api/v1/test", (req, res) => {
+  return res
+    .status(200)
+    .json({ message: "Welcome to the Auth-Experiment API" });
 });
 
 app.use((req, res, next) => {
-  res.status(404).json({ message: "Not Found" });
+  const error = { status: 404, message: "NOT FOUND" };
+  return res.render("error", { title: "Auth-Experiment | Error", error });
 });
 
 module.exports = app;
