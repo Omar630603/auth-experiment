@@ -1,0 +1,28 @@
+<% if (typeof message !== 'undefined') { %>
+<div class="alert">
+  <p class="message"><%= message %></p>
+</div>
+<% } %>
+<div class="container">
+  <h1 class="title">Account details</h1>
+  <p class="description">Here you can see the details of your account</p>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><%= user.name %></h5>
+      <h6 class="card-subtitle"><%= user.username %></h6>
+      <p class="card-text"><%= user.email %></p>
+      <div class="action">
+        <a href="/profile/update" class="btn btn-primary">Update Data</a>
+        <a href="/profile/update/password" class="btn btn-primary"
+          >Update Password</a
+        >
+        <a href="/logout" class="btn btn-danger">logout</a>
+        <form action="/profile/delete" method="POST">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

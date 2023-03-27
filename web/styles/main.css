@@ -228,6 +228,7 @@ button[type="submit"] {
   justify-content: flex-start;
   align-items: center;
   align-self: flex-end;
+  gap: 10px;
 }
 
 .action button {

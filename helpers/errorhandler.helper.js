@@ -7,7 +7,7 @@ function errorHandler(err, req, res, next) {
     return res.status(400).json({ message: err.message });
   }
 
-  if (err.name === "JsonWebTokenError" || err.name === "SessionError") {
+  if (err.name === "JsonWebTokenError" || err.name === "TokenError") {
     return res.status(401).json({ message: "Unauthorized" });
   }
 

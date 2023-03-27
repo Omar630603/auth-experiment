@@ -5,7 +5,8 @@ const app = express();
 const cors = require("cors");
 const authJWT = require("./helpers/jsonwebtoken.helper");
 const errors = require("./helpers/errorhandler.helper");
-const authRoutes = require("./routes/api/auth.routes");
+const authApiRoutes = require("./routes/api/auth.routes");
+const authWebRoutes = require("./routes/web/auth.routes");
 
 app.use(
   cors({
@@ -26,10 +27,11 @@ app.set("layout", path.join(__dirname, "web", "layouts", "main"));
 app.use(
   authJWT.authenticateToken.unless({
     path: [
-      { url: "/", methods: ["GET"] },
+      // { url: "/", methods: ["GET"] },
       { url: "/register", methods: ["GET"] },
+      { url: "/register", methods: ["POST"] },
       { url: "/login", methods: ["GET"] },
-      { url: "/api/v1/test", methods: ["GET"] },
+      { url: "/login", methods: ["POST"] },
       { url: "/api/v1/register", methods: ["POST"] },
       { url: "/api/v1/login", methods: ["POST"] },
     ],
@@ -39,10 +41,12 @@ app.use(
 app.get("/", (req, res) => {
   return res.render("index", {
     title: "Auth-Experiment | Home",
+    user: req.user,
   });
 });
 
-app.use("/api/v1", authRoutes);
+app.use("/", authWebRoutes);
+app.use("/api/v1", authApiRoutes);
 app.use(errors.errorHandler);
 
 app.get("/api/v1/test", (req, res) => {
