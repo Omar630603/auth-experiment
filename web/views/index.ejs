@@ -1,6 +1,12 @@
 <div class="container">
   <h1 class="title">Welcome to Auth-Experiment!</h1>
+  <% if (typeof user === 'undefined') { %>
   <div class="alert alert-warning">
     <p class="message">Hello</p>
   </div>
+  <% } else { %>
+  <div class="alert alert-success">
+    <p class="message">Hello <%= user.name %></p>
+  </div>
+  <% } %>
 </div>

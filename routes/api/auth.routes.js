@@ -24,6 +24,4 @@ router.patch("/profile/password", updatePassword);
 
 router.delete("/profile", deleteProfile);
 
-router.get("/logout", logout);
-
 module.exports = router;

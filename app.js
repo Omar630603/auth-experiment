@@ -7,6 +7,7 @@ const authJWT = require("./helpers/jsonwebtoken.helper");
 const errors = require("./helpers/errorhandler.helper");
 const authApiRoutes = require("./routes/api/auth.routes");
 const authWebRoutes = require("./routes/web/auth.routes");
+const cookieParser = require("cookie-parser");
 
 app.use(
   cors({
@@ -17,6 +18,8 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, "web")));
 app.use(ejsLayouts);
 
@@ -27,11 +30,11 @@ app.set("layout", path.join(__dirname, "web", "layouts", "main"));
 app.use(
   authJWT.authenticateToken.unless({
     path: [
-      // { url: "/", methods: ["GET"] },
       { url: "/register", methods: ["GET"] },
       { url: "/register", methods: ["POST"] },
       { url: "/login", methods: ["GET"] },
       { url: "/login", methods: ["POST"] },
+      { url: "/api/v1/test", methods: ["GET"] },
       { url: "/api/v1/register", methods: ["POST"] },
       { url: "/api/v1/login", methods: ["POST"] },
     ],
@@ -39,10 +42,17 @@ app.use(
 );
 
 app.get("/", (req, res) => {
-  return res.render("index", {
-    title: "Auth-Experiment | Home",
-    user: req.user,
-  });
+  if (req.user) {
+    return res.render("index", {
+      title: "Auth-Experiment | Home",
+      user: req.user.data,
+    });
+  } else {
+    return res.render("index", {
+      title: "Auth-Experiment | Home",
+      user: req.user,
+    });
+  }
 });
 
 app.use("/", authWebRoutes);
@@ -57,7 +67,11 @@ app.get("/api/v1/test", (req, res) => {
 
 app.use((req, res, next) => {
   const error = { status: 404, message: "NOT FOUND" };
-  return res.render("error", { title: "Auth-Experiment | Error", error });
+  return res.render("error", {
+    title: "Auth-Experiment | Error",
+    error,
+    user: req.user,
+  });
 });
 
 module.exports = app;

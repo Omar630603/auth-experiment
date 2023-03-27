@@ -74,15 +74,9 @@ async function updatePassword(id, password) {
 }
 
 async function deleteProfile(id) {
-  authJWT.invalidateAccessToken(id);
   const user = await User.findByIdAndDelete(id).exec();
   if (!user) throw "User Delete Failed";
   return { message: "User Deleted Successfully" };
-}
-
-async function logout(id) {
-  authJWT.invalidateAccessToken(id);
-  return { message: "Logged Out Successfully" };
 }
 
 module.exports = {
@@ -93,5 +87,4 @@ module.exports = {
   updateProfile,
   updatePassword,
   deleteProfile,
-  logout,
 };

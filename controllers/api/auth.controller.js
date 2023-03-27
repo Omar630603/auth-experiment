@@ -120,14 +120,6 @@ function deleteProfile(req, res, next) {
     .catch((err) => next(err));
 }
 
-function logout(req, res, next) {
-  const id = req.user.id;
-  authServices
-    .logout(id)
-    .then((results) => res.status(200).json(results))
-    .catch((err) => next(err));
-}
-
 function validateData(data, res, requiredFields) {
   const missingFields = requiredFields.filter((field) => !(field in data));
   if (missingFields.length > 0) {
@@ -145,5 +137,4 @@ module.exports = {
   updateProfile,
   updatePassword,
   deleteProfile,
-  logout,
 };

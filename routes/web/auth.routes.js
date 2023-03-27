@@ -12,22 +12,34 @@ const {
 
 const router = express.Router();
 
-router.get("/register", register);
-router.post("/register", register);
+function isLoggedIn(req, res, next) {
+  if (req.user) {
+    return next();
+  } else {
+    if (req.path === "/login" || req.path === "/register") {
+      return next();
+    } else {
+      return res.redirect("/login");
+    }
+  }
+}
 
-router.get("/login", login);
-router.post("/login", login);
+router.get("/register", isLoggedIn, register);
+router.post("/register", isLoggedIn, register);
 
-router.get("/profile", getProfile);
+router.get("/login", isLoggedIn, login);
+router.post("/login", isLoggedIn, login);
 
-router.get("/profile/update", updateProfile);
-router.post("/profile/update", updateProfile);
+router.get("/profile", isLoggedIn, getProfile);
 
-router.get("/profile/update/password", updatePassword);
-router.post("/profile/update/password", updatePassword);
+router.get("/profile/update", isLoggedIn, updateProfile);
+router.post("/profile/update", isLoggedIn, updateProfile);
 
-router.post("/profile", deleteProfile);
+router.get("/profile/update/password", isLoggedIn, updatePassword);
+router.post("/profile/update/password", isLoggedIn, updatePassword);
 
-router.get("/logout", logout);
+router.post("/profile/delete", isLoggedIn, deleteProfile);
+
+router.get("/logout", isLoggedIn, logout);
 
 module.exports = router;
