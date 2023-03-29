@@ -8,7 +8,7 @@ function authenticateToken(req, res, next) {
   try {
     const authHeader = req.headers["authorization"];
     let token = authHeader && authHeader.split(" ")[1];
-    if (token == null) token = req.cookies.token;
+    if (token == null) token = req.cookies?.token;
     if (token == null) {
       return next();
     }
