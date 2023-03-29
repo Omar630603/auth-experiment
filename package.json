@@ -11,7 +11,9 @@
   "jest": {
     "setupFilesAfterEnv": [
       "jest-expect-message"
-    ]
+    ],
+    "noStackTrace": true,
+    "silent": false
   },
   "repository": {
     "type": "git",
