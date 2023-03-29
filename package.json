@@ -4,9 +4,19 @@
   "description": "Test for express.js and mongoose auth application",
   "main": "server.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --testTimeout=20000",
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "api-testB01": "cross-env NODE_ENV=test jest -i tests/api/testB01.test.js --testTimeout=20000",
+    "web-testB01": "cross-env NODE_ENV=test jest -i tests/web/testB01.test.js --testTimeout=20000",
+    "api-testB02": "cross-env NODE_ENV=test jest -i tests/api/testB02.test.js --testTimeout=20000",
+    "web-testB02": "cross-env NODE_ENV=test jest -i tests/web/testB02.test.js --testTimeout=20000",
+    "api-testB03": "cross-env NODE_ENV=test jest -i tests/api/testB03.test.js --testTimeout=20000",
+    "web-testB03": "cross-env NODE_ENV=test jest -i tests/web/testB03.test.js --testTimeout=20000",
+    "api-testB04": "cross-env NODE_ENV=test jest -i tests/api/testB04.test.js --testTimeout=20000",
+    "web-testB04": "cross-env NODE_ENV=test jest -i tests/web/testB04.test.js --testTimeout=20000",
+    "api-testB05": "cross-env NODE_ENV=test jest -i tests/api/testB05.test.js --testTimeout=20000",
+    "web-testB05": "cross-env NODE_ENV=test jest -i tests/web/testB05.test.js --testTimeout=20000",
+    "testBA": "cross-env NODE_ENV=test jest --testTimeout=40000 --silent --detectOpenHandles"
   },
   "jest": {
     "setupFilesAfterEnv": [
