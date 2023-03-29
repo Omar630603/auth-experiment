@@ -80,8 +80,8 @@ async function deleteProfile(id) {
 }
 
 module.exports = {
-  login,
   register,
+  login,
   checkPassword,
   getProfile,
   updateProfile,
