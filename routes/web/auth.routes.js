@@ -6,8 +6,8 @@ const {
   getProfile,
   updateProfile,
   updatePassword,
-  logout,
   deleteProfile,
+  logout,
 } = require("../../controllers/web/auth.controller");
 
 const router = express.Router();
