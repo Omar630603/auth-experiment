@@ -34,7 +34,6 @@ app.use(
       { url: "/register", methods: ["POST"] },
       { url: "/login", methods: ["GET"] },
       { url: "/login", methods: ["POST"] },
-      { url: "/api/v1/test", methods: ["GET"] },
       { url: "/api/v1/register", methods: ["POST"] },
       { url: "/api/v1/login", methods: ["POST"] },
     ],
