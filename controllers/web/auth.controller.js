@@ -81,7 +81,7 @@ function login(req, res, next) {
       })
       .catch((err) => {
         req.method = "GET";
-        req.body.message = error;
+        req.body.message = err;
         return login(req, res, next);
       });
   }
