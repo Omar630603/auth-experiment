@@ -14,13 +14,12 @@ const router = express.Router();
 
 function isLoggedIn(req, res, next) {
   if (req.user) {
+    if (req.path === "/login" || req.path === "/register")
+      return res.redirect("/");
     return next();
   } else {
-    if (req.path === "/login" || req.path === "/register") {
-      return next();
-    } else {
-      return res.redirect("/login");
-    }
+    if (req.path === "/login" || req.path === "/register") return next();
+    return res.redirect("/login");
   }
 }
 

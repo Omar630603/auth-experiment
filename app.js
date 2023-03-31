@@ -30,9 +30,7 @@ app.set("layout", path.join(__dirname, "web", "layouts", "main"));
 app.use(
   authJWT.authenticateToken.unless({
     path: [
-      { url: "/register", methods: ["GET"] },
       { url: "/register", methods: ["POST"] },
-      { url: "/login", methods: ["GET"] },
       { url: "/login", methods: ["POST"] },
       { url: "/api/v1/register", methods: ["POST"] },
       { url: "/api/v1/login", methods: ["POST"] },
