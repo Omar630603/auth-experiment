@@ -68,7 +68,7 @@ async function updatePassword(id, password) {
     new: true,
   });
 
-  if (!user) throw "Profile Update Failed";
+  if (!user) throw "Password Update Failed";
 
   return { user: user.toJSON(), message: "Password Updated Successfully" };
 }
