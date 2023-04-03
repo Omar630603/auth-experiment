@@ -1,6 +1,6 @@
 # API-Experiment
 
-This is an API project using NodeJS, ExpressJS, and MongoDB. The goal of this project is to try testing API Auth endpoints using Jest and Supertest.
+This is an API and web project using NodeJS, ExpressJS, and MongoDB. The goal of this project is to try testing API endpoints and Web pages using Jest, Supertest, and Puppeteer.
 
 # Features
 
@@ -32,11 +32,16 @@ Start for production
 
 Run tests
 
-    npm run testB01
-    npm run testB02
-    npm run testB03
-    npm run testB04
-    npm run testB05
+    npm run api-testB01
+    npm run web-testB01
+    npm run api-testB02
+    npm run web-testB02
+    npm run api-testB03
+    npm run web-testB03
+    npm run api-testB04
+    npm run web-testB04
+    npm run api-testB05
+    npm run web-testB05
     npm run testBA
 
 
@@ -45,12 +50,26 @@ Run tests
 
 The project can be tested using Postman to check the endpoints.
 
-The endpoints are:
+The API endpoints are:
 
-- POST /api/v1/auth/register
-- POST /api/v1/auth/login
-- GET /api/v1/auth/profile
-- PATCH /api/v1/auth/profile
-- PATCH /api/v1/auth/profile/password
-- DELETE /api/v1/auth/profile
-- GET /api/v1/auth/logout
+- POST /api/v1/register -> Register new users
+- POST /api/v1/login -> Login user and return access token
+- GET /api/v1/profile -> Fetch user's profile data
+- PATCH /api/v1/profile -> Update user's profile data
+- PATCH /api/v1/profile/password -> Update user's password
+- DELETE /api/v1/profile -> Delete user's profile data
+- GET /api/v1/logout -> Logout users
+
+The Web routes are:
+
+- GET /register -> Show register form
+- POST /register -> Register new users
+- GET /login -> Show login form
+- POST /login -> Login user and return access token
+- GET /profile -> Fetch user's profile data
+- GET /profile/update -> Show update profile form
+- POST /profile/update -> Update user's profile data
+- GET /profile/update/password -> Show update password form
+- POST /profile/update/password -> Update user's password
+- POST /profile/delete -> Delete user's profile data
+- GET /logout -> Logout users
