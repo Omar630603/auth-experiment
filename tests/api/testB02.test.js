@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const request = require("supertest");
 const app = require("../../app");
-const packages = require("../../package.json");
 const jwt = require("jsonwebtoken");
-const User = require("../../models/user.model");
 
 require("dotenv").config();
 mongoose.set("strictQuery", true);
