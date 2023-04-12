@@ -1,4 +1,4 @@
-# API-Experiment
+# Auth-Experiment
 
 This is an API and web project using NodeJS, ExpressJS, and MongoDB. The goal of this project is to try testing API endpoints and Web pages using Jest, Supertest, and Puppeteer.
 
