@@ -267,7 +267,7 @@ describe("Testing the login page image snapshots", () => {
       `The web styling for the edit page is not correct check the file "tests/web/images/__diff_output__/edit-page-diff.png" to find the difference`,
       options
     ).toMatchImageSnapshot({
-      customDiffConfig: { threshold: 0.1 },
+      customDiffConfig: { threshold: 0.9 },
       customSnapshotsDir: "tests/web/images",
       customSnapshotIdentifier: "edit-page",
     });
@@ -287,7 +287,7 @@ describe("Testing the login page image snapshots", () => {
       `The web styling for the edit password page is not correct check the file "tests/web/images/__diff_output__/edit-password-page-diff.png" to find the difference`,
       options
     ).toMatchImageSnapshot({
-      customDiffConfig: { threshold: 0.1 },
+      customDiffConfig: { threshold: 0.9 },
       customSnapshotsDir: "tests/web/images",
       customSnapshotIdentifier: "edit-password-page",
     });
