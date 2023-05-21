@@ -167,7 +167,7 @@ describe("Testing the profile page", () => {
   });
 });
 
-describe("Testing the login page image snapshots", () => {
+describe("Testing the profile page image snapshots", () => {
   it("matches the expected styling for the profile page", async () => {
     if (!fs.existsSync("tests/web/images/profile-page.png")) {
       throw new Error(
